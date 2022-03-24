@@ -1,0 +1,36 @@
+<?php
+include 'conn.php';
+use PHPMailer\PHPMailer\PHPMailer;
+$mess= $_GET['status'];
+if($mess == 'team'){
+	$reserve_id = $_GET['reserve_id'];
+	$sql = "SELECT team_id FROM tb_reservation WHERE reserve_id = '$reserve_id'";
+	$query = $connect->query($sql);
+   while ($row = mysqli_fetch_array($query)) {
+	   $team_id = $row['team_id'];
+   }
+  $sql2 = "SELECT team_name FROM tb_teams WHERE team_id = '$team_id'";
+  $query2 = $connect->query($sql2);
+   while ($row2 = mysqli_fetch_array($query2)) {
+	   $team_name = $row2['team_name'];
+   }
+	$sql3 = "SELECT username FROM tb_memberteams WHERE team_name = '$team_name'";
+	  $query3 = $connect->query($sql3);
+   while ($row3 = mysqli_fetch_array($query3)) {
+	   $username = $row3['username']; 
+	   
+	   $sql4 = "SELECT email,firstname FROM tb_user WHERE username = '$username'";
+	  $query4 = $connect->query($sql4);
+   while ($row4 = mysqli_fetch_array($query4)) {
+	   $email = $row4['email']; 
+	    $firstname = $row4['firstname']; 
+	   echo $email;
+	   echo $firstname;
+   }
+   }
+  
+
+	
+}
+
+?>

@@ -1,0 +1,10 @@
+<?php
+
+include 'connect.php';
+$sql = "SELECT * FROM tb_user WHERE status = 'รอตรวจสอบ' ";
+$query = $connect->query($sql);
+$resultquery = array();
+while ($fetchData = $query->fetch_assoc()) {
+	$resultquery[] = $fetchData;
+	
+}echo json_encode($resultquery);
